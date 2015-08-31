@@ -5,20 +5,31 @@
     <title></title>
 </head>
 <body>
+<div id="myDiv">
 
+</div>
 <script>
-    var a1 = '1';
-    var a2 = '0';
-    if (a1 == a2) {
-        alert('==true')
-    } else {
-        alert('==false')
+    function getElementPosition(element) {
+        var elem = element, tagname = "", x = 0, y = 0;
+
+        while ((typeof(elem) == "object") && (typeof(elem.tagName) != "undefined")) {
+            y += elem.offsetTop;
+            x += elem.offsetLeft;
+            tagname = elem.tagName.toUpperCase();
+
+            if (tagname == "BODY")
+                elem = 0;
+
+            if (typeof(elem) == "object") {
+                if (typeof(elem.offsetParent) == "object")
+                    elem = elem.offsetParent;
+            }
+        }
+
+        return {x: x, y: y};
     }
-    if (a1 === a2) {
-        alert('===true')
-    } else {
-        alert('===false')
-    }
+    var div = getElementPosition(document.getElementById("myDiv"));
+
 </script>
 </body>
 </html>

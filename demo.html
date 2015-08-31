@@ -3,60 +3,73 @@
     <title>Box2dWeb Demo</title>
 </head>
 <body onload="init();">
+
 <canvas id="canvas" width="600" height="400" style="background-color:#333333;"></canvas>
+
 </body>
 <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>
 <script type="text/javascript">
 
     function init() {
+//初始化变量
         var b2Vec2 = Box2D.Common.Math.b2Vec2
                 , b2AABB = Box2D.Collision.b2AABB
                 , b2BodyDef = Box2D.Dynamics.b2BodyDef
                 , b2Body = Box2D.Dynamics.b2Body
                 , b2FixtureDef = Box2D.Dynamics.b2FixtureDef
-                , b2Fixture = Box2D.Dynamics.b2Fixture
-                , b2World = Box2D.Dynamics.b2World
-                , b2MassData = Box2D.Collision.Shapes.b2MassData
-                , b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
+                ,
+//                b2Fixture = Box2D.Dynamics.b2Fixture,
+                b2World = Box2D.Dynamics.b2World
+                ,
+//                b2MassData = Box2D.Collision.Shapes.b2MassData,
+                b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
                 , b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
                 , b2DebugDraw = Box2D.Dynamics.b2DebugDraw
                 , b2MouseJointDef = Box2D.Dynamics.Joints.b2MouseJointDef
                 ;
-
+//创建世界
         var world = new b2World(
                 new b2Vec2(0, 0)    //gravity
                 , true                 //allow sleep
         );
-
+//创建夹具
         var fixDef = new b2FixtureDef;
-        fixDef.density = 0.0;
-        fixDef.friction = 0.0;
-        fixDef.restitution = 1;
-
+        fixDef.density = 0.0;//密度
+        fixDef.friction = 0.0;//摩擦
+        fixDef.restitution = 1;//恢复，碰撞之后速度改变（1：不发生改变）
+//创建刚体
         var bodyDef = new b2BodyDef;
         //create ground
-        bodyDef.type = b2Body.b2_staticBody;
-        fixDef.shape = new b2PolygonShape;
-        fixDef.shape.SetAsBox(20, 2);
-        bodyDef.position.Set(10, 400 / 30 + 1.8);
+        bodyDef.type = b2Body.b2_staticBody;//创建静态刚体
+        fixDef.shape = new b2PolygonShape;//创建多边形形状
+
+        fixDef.shape.SetAsBox(20, 2);//形状矩形
+        bodyDef.position.Set(10, 400 / 30 + 1.8);//设置刚体位置
+        world.CreateBody(bodyDef).CreateFixture(fixDef);//创建并通过夹具绑定
+
+        bodyDef.position.Set(10, -1.8);//修改位置
         world.CreateBody(bodyDef).CreateFixture(fixDef);
-        bodyDef.position.Set(10, -1.8);
-        world.CreateBody(bodyDef).CreateFixture(fixDef);
-        fixDef.shape.SetAsBox(2, 14);
+
+        fixDef.shape.SetAsBox(2, 14);//创建新的形状
         bodyDef.position.Set(-1.8, 13);
         world.CreateBody(bodyDef).CreateFixture(fixDef);
+
         bodyDef.position.Set(21.8, 13);
         world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 
         //create some objects
+//        创建一些刚体
         bodyDef.type = b2Body.b2_dynamicBody;
-//        fixDef.shape = new b2PolygonShape;
-//        fixDef.shape.SetAsBox(0.5, 0.5);
-        fixDef.shape = new b2CircleShape(0.6);
-        bodyDef.position.x = 5;
-        bodyDef.position.y = 5;
-        world.CreateBody(bodyDef).CreateFixture(fixDef);
+//创建多边形        fixDef.shape = new b2PolygonShape;
+//设置矩形        fixDef.shape.SetAsBox(0.5, 0.5);
+        fixDef.shape = new b2CircleShape(0.6);//创建圆形
+        bodyDef.position.Set(5, 5);//注意Set大写
+//        设置位置等效bodyDef.position.Set(5,5)
+//        bodyDef.position.x = 5;
+//        bodyDef.position.y = 5;
+        world.CreateBody(bodyDef).CreateFixture(fixDef);//创建并通过夹具绑定
+        //随机产生一些刚体
 //        for (var i = 0; i < 20  ; ++i) {
 //            if (Math.random() > 0.5) {
 //                fixDef.shape = new b2PolygonShape;
@@ -75,21 +88,24 @@
 //        }
 
         //setup debug draw
+        //开始调试绘制
         var debugDraw = new b2DebugDraw();
-        debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
-        debugDraw.SetDrawScale(30.0);
-        debugDraw.SetFillAlpha(0.5);
-        debugDraw.SetLineThickness(1.0);
+        debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));//得到绘制的canvas
+        debugDraw.SetDrawScale(30.0);//绘制比例 绘制比例是如何计算
+        debugDraw.SetFillAlpha(0.9);//设置透明度
+        debugDraw.SetLineThickness(1.0);//？
         debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
-        world.SetDebugDraw(debugDraw);
+        world.SetDebugDraw(debugDraw);//绘制
 
         window.setInterval(update, 1000 / 60);
 
         //mouse
-
+//鼠标事件
         var mouseX, mouseY, mousePVec, isMouseDown, selectedBody, mouseJoint;
+        //getElementPosition方法
         var canvasPosition = getElementPosition(document.getElementById("canvas"));
 
+//添加自定义事件
         document.addEventListener("mousedown", function (e) {
             isMouseDown = true;
             handleMouseMove(e);
@@ -104,9 +120,10 @@
         }, true);
 
         function handleMouseMove(e) {
+            //clientX 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（或客户区）的水平坐标。客户区指的是当前窗口。
             mouseX = (e.clientX - canvasPosition.x) / 30;
             mouseY = (e.clientY - canvasPosition.y) / 30;
-        };
+        }
 
         function getBodyAtMouse() {
             mousePVec = new b2Vec2(mouseX, mouseY);
@@ -161,8 +178,9 @@
             world.Step(1 / 60, 10, 10);
             world.DrawDebugData();
             world.ClearForces();
-        };
+        }
 
+//得到页面元素的当前窗口位置
         //helpers
 
         //http://js-tut.aardon.de/js-tut/tutorial/position.html
@@ -188,7 +206,6 @@
 
 
     }
-    ;
 
 </script>
 

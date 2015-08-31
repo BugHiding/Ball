@@ -3,6 +3,9 @@
     <words>
       <w>consolas</w>
       <w>helloiio</w>
+      <w>mousemove</w>
+      <w>mouseup</w>
+      <w>tagname</w>
     </words>
   </dictionary>
 </component>
