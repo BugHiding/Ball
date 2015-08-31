@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>
+<script type="text/javascript" src="js/iioEngine.js"></script>
+<script type="text/javascript">
+    Helloiio = function (io) {
+//        io.addObj(new iio.Text('Hello World!!', io.canvas.center)
+//                .setFont('30px Consolas')
+//                .setTextAlign('center')
+//                .setFillStyle('black'));
+        io.addObj(new iio.Text('BugHiding!!', io.canvas.center)
+                .setFont('30px Consolas')
+                .setTextAlign('center')
+                .setFillStyle('black'));
+    };
+
+
+    iio.start(Helloiio);
+</script>
+</body>
+</html>
