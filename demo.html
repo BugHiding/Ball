@@ -30,6 +30,7 @@
 //创建世界
         var world = new b2World(
                 new b2Vec2(0, 0)    //gravity
+                //gravity 定义了世界的重力 也是一个2d向量（Box2D.Common.Math.b2Vec2(x,y)),其中x是水平方向重力，正为右，负为左；y是垂直方向重力，正为下，负为上。
                 , true                 //allow sleep
         );
 //创建夹具
@@ -121,7 +122,7 @@
 
         function handleMouseMove(e) {
             //clientX 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（或客户区）的水平坐标。客户区指的是当前窗口。
-            mouseX = (e.clientX - canvasPosition.x) / 30;
+            mouseX = (e.clientX - canvasPosition.x) / 30;//得到鼠标当前在canvas的位置转换成box2d坐标
             mouseY = (e.clientY - canvasPosition.y) / 30;
         }
 
@@ -200,13 +201,9 @@
                         elem = elem.offsetParent;
                 }
             }
-
             return {x: x, y: y};
         }
-
-
     }
-
 </script>
 
 
