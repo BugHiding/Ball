@@ -2,34 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" media="all" href="node/node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" media="all" href="node/buttons.css">
     <title></title>
+
 </head>
 <body>
-<div id="myDiv">
+<button class="button button-primary button-box button-giant button-longshadow-right button-glow button-rounded button-raised">
+    <i class="fa fa-archive"></i>
+</button>
 
-</div>
-<script>
-    function getElementPosition(element) {
-        var elem = element, tagname = "", x = 0, y = 0;
 
-        while ((typeof(elem) == "object") && (typeof(elem.tagName) != "undefined")) {
-            y += elem.offsetTop;
-            x += elem.offsetLeft;
-            tagname = elem.tagName.toUpperCase();
-
-            if (tagname == "BODY")
-                elem = 0;
-
-            if (typeof(elem) == "object") {
-                if (typeof(elem.offsetParent) == "object")
-                    elem = elem.offsetParent;
-            }
-        }
-
-        return {x: x, y: y};
-    }
-    var div = getElementPosition(document.getElementById("myDiv"));
-
-</script>
 </body>
 </html>
