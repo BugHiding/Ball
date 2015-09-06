@@ -4,6 +4,7 @@
   "description": "This is a game of Box2dWeb",
   "main": "gulpfile.js",
   "dependencies": {
+    "box2dweb": "^2.1.0-b",
     "font-awesome": "^4.4.0",
     "gulp": "^3.9.0"
   },
