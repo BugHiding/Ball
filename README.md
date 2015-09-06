@@ -8,4 +8,5 @@ Use the Box2dWeb
 
 ```bash
 npm install
+bower install
 ```
