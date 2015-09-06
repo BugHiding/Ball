@@ -1,0 +1,27 @@
+{
+  "name": "ball",
+  "version": "1.0.0",
+  "description": "This is a game of Box2dWeb",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BugHiding/Ball.git"
+  },
+  "keywords": [
+    "Box2dWeb",
+    "Ball"
+  ],
+  "author": "BugHiding",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BugHiding/Ball/issues"
+  },
+  "homepage": "https://github.com/BugHiding/Ball#readme"
+}
