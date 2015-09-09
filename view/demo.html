@@ -16,7 +16,7 @@
 
     function init() {
 //初始化变量
-        var b2Vec2, b2AABB, b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2MassData, b2PolygonShape, b2CircleShape, b2DebugDraw, b2MouseJointDef;
+        var b2Vec2, b2AABB, b2BodyDef, b2Body, b2FixtureDef, b2World, b2PolygonShape, b2CircleShape, b2DebugDraw, b2MouseJointDef;
         b2Vec2 = Box2D.Common.Math.b2Vec2;
         b2AABB = Box2D.Collision.b2AABB;
         b2BodyDef = Box2D.Dynamics.b2BodyDef;
@@ -37,7 +37,7 @@
         );
 //创建夹具
         var fixDef = new b2FixtureDef;
-        fixDef.density = 0.0;//密度
+        fixDef.density = 0.5;//密度 密度为0 矩形不翻转
         fixDef.friction = 0.0;//摩擦
         fixDef.restitution = 1;//恢复，碰撞之后速度改变（1：不发生改变）
 //创建刚体
@@ -60,7 +60,11 @@
         bodyDef.position.Set(21.8, 13);
         world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-
+        bodyDef.type = b2Body.b2_staticBody;
+        fixDef.shape = new b2PolygonShape;
+        fixDef.shape.SetAsBox(2, 0.5);
+        bodyDef.position.Set(5, 5);
+        world.CreateBody(bodyDef).CreateFixture(fixDef);
         //create some objects
 //        创建一些刚体
         bodyDef.type = b2Body.b2_dynamicBody;
@@ -68,6 +72,11 @@
 //设置矩形        fixDef.shape.SetAsBox(0.5, 0.5);
         fixDef.shape = new b2CircleShape(0.6);//创建圆形
         bodyDef.position.Set(5, 5);//注意Set大写
+        world.CreateBody(bodyDef).CreateFixture(fixDef);
+        fixDef.shape = new b2PolygonShape;
+        fixDef.shape.SetAsBox(2, 0.5);
+        bodyDef.position.Set(5, 6);
+
 //        设置位置等效bodyDef.position.Set(5,5)
 //        bodyDef.position.x = 5;
 //        bodyDef.position.y = 5;
@@ -126,6 +135,7 @@
             //clientX 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（或客户区）的水平坐标。客户区指的是当前窗口。
             mouseX = (e.clientX - canvasPosition.x) / 30;//得到鼠标当前在canvas的位置转换成box2d坐标
             mouseY = (e.clientY - canvasPosition.y) / 30;
+
         }
 
         function getBodyAtMouse() {
@@ -206,7 +216,28 @@
             return {x: x, y: y};
         }
 
-//        ('000000' + Math.floor(Math.random() * 0x1000000).toString(16)).slice(-6)生成随机颜色
+        document.addEventListener("keydown", function (e) {
+            var keyString = e.keyCode;
+//            switch (keyString) {
+//                case 87:
+//                    alert("Press W");
+//                    break;
+//
+//                case 65:
+//                    alert("Press A");
+//                    break;
+//
+//                case 83:
+//                    alert("Press S");
+//                    break;
+//
+//                case 68:
+//                    alert("Press D");
+//                    break;
+//            }
+            console.
+        }, true);
+
     }
 </script>
 

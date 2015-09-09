@@ -9,9 +9,47 @@
 </head>
 <body>
 <button class="button button-primary button-box button-giant button-longshadow-right button-glow button-rounded button-raised">
-    <i class="fa fa-archive"></i>
+    <i class="fa fa-cloud" id="i"></i>
 </button>
+<div style="background-color: #006600">hello</div>
+<script>
+    function RD (){
+        window.location.href="index.html";
+    }
+    var n = 0;
+    var i = document.getElementById("i")
+    i.className = "fa fa-book";
+    document.addEventListener("keydown", function (e) {
+        var keyString = e.keyCode;
+        //87:W
+        //65:A
+        //83:S
+        //68:D
+        if (keyString == 87) {
+            alert("Press 'W'")
+        }
+        switch (keyString){
+            case 87:
+                alert("Press W");
+                break;
 
+            case 65:
+                alert("Press A");
+                break;
+
+            case 83:
+                alert("Press S");
+                break;
+
+            case 68:
+                alert("Press D");
+                break;
+        }
+        console.log(keyString);
+    }, false);
+
+    //        ('000000' + Math.floor(Math.random() * 0x1000000).toString(16)).slice(-6)生成随机颜色
+</script>
 
 </body>
 </html>

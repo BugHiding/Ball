@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "Buttons": "~2.0.0",
-    "iioengine": "~1.2.2"
+    "iioengine": "~1.2.2",
+    "stage-js": "~0.8.2"
   }
 }
